@@ -3,14 +3,10 @@ unit Unit1;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
-  System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, unit2, Vcl.StdCtrls;
 
 type
-
-  { TForm1 }
-
   TForm1 = class(TForm)
     Button1: TButton;
     Label1: TLabel;
@@ -18,9 +14,9 @@ type
     CheckBox1: TCheckBox;
     procedure Button1Click(Sender: TObject);
   private
-    { private declarations }
+    { Private declarations }
   public
-    { public declarations }
+    { Public declarations }
   end;
 
 var
@@ -28,8 +24,7 @@ var
 
 implementation
 
-{$R Unit1.dfm}
-{ TForm1 }
+{$R *.dfm}
 
 procedure TForm1.Button1Click(Sender: TObject);
 var
