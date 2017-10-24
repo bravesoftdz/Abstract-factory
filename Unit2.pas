@@ -2,103 +2,63 @@ unit Unit2;
 
 interface
 
+uses
+  UAbstractFactory;
+
 type
 
-AbstractButton = class
-  function print:string; virtual; abstract;
-end;
+  Controller = class
+  private
+    FMyField: boolean;
+    fAbstractFactory: AbstractFactory;
+    fAbstractButton: AbstractButton;
+    fAbstractWindow: AbstractWindow;
+    procedure SetCreateAbstractFactory(Value: boolean);
+    function GetDestroyAbstractFactory: boolean;
+  public
+    property MyField: boolean read GetDestroyAbstractFactory write SetCreateAbstractFactory;
+    function AbstractFactoryPrintButton: string;
+    function AbstractFactoryPrintWindow: string;
+  end;
 
-WinButton = class(AbstractButton)
-  function print:string; override;
-end;
+implementation ///////////////////////////////////////////////////////////
 
-MacButton = class(AbstractButton)
-  function print:string; override;
-end;
 
-AbstractWindow = class
-  function print:string; virtual; abstract;
-end;
+{ Controller }
 
-WinWindow = class(AbstractWindow)
-  function print:string; override;
-end;
-
-MacWindow = class(AbstractWindow)
-  function print:string; override;
-end;
-
-AbstractFactory = class
-  function printButton(fAbstractButton: AbstractButton):string; virtual; abstract;
-  function printWindow(fAbstractWindow: AbstractWindow):string; virtual; abstract;
-end;
-
-WinFactory = class(AbstractFactory)
-  function printButton(fAbstractButton: AbstractButton):string; override;
-  function printWindow(fAbstractWindow: AbstractWindow):string; override;
-end;
-
-MacFactory = class(AbstractFactory)
-  function printButton(fAbstractButton: AbstractButton):string; override;
-  function printWindow(fAbstractWindow: AbstractWindow):string; override;
-end;
-
-implementation  ///////////////////////////////////////////////////////////
-
-{ WinFactory }
-
-function WinFactory.printButton(fAbstractButton: AbstractButton): string;
+function Controller.AbstractFactoryPrintButton: string;
 begin
-  fAbstractButton:=WinButton.Create;
-  result:=fAbstractButton.print;
+  result := fAbstractFactory.printButton(fAbstractButton);
 end;
 
-function WinFactory.printWindow(fAbstractWindow: AbstractWindow): string;
+function Controller.AbstractFactoryPrintWindow: string;
 begin
-  fAbstractWindow:=WinWindow.Create;
-  result:=fAbstractWindow.print;
+  result := fAbstractFactory.printWindow(fAbstractWindow);
 end;
 
-{ MacFactory }
-
-function MacFactory.printButton(fAbstractButton: AbstractButton): string;
+function Controller.GetDestroyAbstractFactory: boolean;
 begin
-  fAbstractButton:=MacButton.Create;
-  result:=fAbstractButton.print;
+  fAbstractFactory.Free;
+  fAbstractButton.Free;
+  fAbstractWindow.Free;
+  result:=FMyField;
 end;
 
-function MacFactory.printWindow(fAbstractWindow: AbstractWindow): string;
+procedure Controller.SetCreateAbstractFactory(Value: boolean);
 begin
-  fAbstractWindow:=MacWindow.Create;
-  result:=fAbstractWindow.print;
-end;
-
-{ WinButton }
-
-function WinButton.print: string;
-begin
-  result:='WinButton';
-end;
-
-{ MacButton }
-
-function MacButton.print: string;
-begin
-  result:='MacButton';
-end;
-
-{ WinWindow }
-
-function WinWindow.print: string;
-begin
-  result:='WinWindow';
-end;
-
-{ MacWindow }
-
-function MacWindow.print: string;
-begin
-  result:='MacWindow';
+  FMyField:=Value;
+  if Value = true then
+  begin
+    fAbstractFactory := WinFactory.Create;
+    fAbstractButton := WinButton.Create;
+    fAbstractWindow := WinWindow.Create;
+  end
+  else
+  begin
+    fAbstractFactory := MacFactory.Create;
+    fAbstractButton := WinButton.Create;
+    fAbstractWindow := MacWindow.Create;
+  end;
 end;
 
 end.

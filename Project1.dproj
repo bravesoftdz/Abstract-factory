@@ -87,11 +87,14 @@
 				<FormType>dfm</FormType>
 			</DCCReference>
 			<DCCReference Include="Unit2.pas"/>
+			<DCCReference Include="UAbstractFactory.pas"/>
 			<None Include="ModelSupport_Project1\default.txaPackage"/>
 			<None Include="ModelSupport_Project1\default.txvpck"/>
 			<None Include="ModelSupport_Project1\Unit2\default.txvpck"/>
 			<None Include="ModelSupport_Project1\Project1\default.txvpck"/>
 			<None Include="ModelSupport_Project1\Unit2\default.txaPackage"/>
+			<None Include="ModelSupport_Project1\UAbstractFactory\default.txvpck"/>
+			<None Include="ModelSupport_Project1\UAbstractFactory\default.txaPackage"/>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>

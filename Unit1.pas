@@ -33,27 +33,13 @@ implementation
 
 procedure TForm1.Button1Click(Sender: TObject);
 var
-  fAbstractFactory: AbstractFactory;
-  fAbstractButton: AbstractButton;
-  fAbstractWindow: AbstractWindow;
+  fController: Controller;
 begin
-  if CheckBox1.Checked = true then
-  begin
-    fAbstractFactory:=WinFactory.Create;
-    fAbstractButton:=WinButton.Create;
-    fAbstractWindow:=WinWindow.Create;
-  end
-  else
-  begin
-    fAbstractFactory:=MacFactory.Create;
-    fAbstractButton:=WinButton.Create;
-    fAbstractWindow:=MacWindow.Create;
-  end;
-  Label1.Caption:=fAbstractFactory.printButton(fAbstractButton);
-  Label2.Caption:=fAbstractFactory.printWindow(fAbstractWindow);
-  fAbstractFactory.Free;
-  fAbstractButton.Free;
-  fAbstractWindow.Free;
+  fController:=Controller.Create;
+  fController.MyField:=CheckBox1.Checked;
+  Label1.Caption := fController.AbstractFactoryPrintButton;
+  Label2.Caption := fController.AbstractFactoryPrintWindow;
+  fController.Free;
 end;
 
 end.
